@@ -1,0 +1,2780 @@
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (132.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (148.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+Migrating to DeviseCreateUsers (20180917120321)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20180917120321_devise_create_users.rb:5
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  ↳ db/migrate/20180917120321_devise_create_users.rb:39
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  ↳ db/migrate/20180917120321_devise_create_users.rb:40
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180917120321"]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (130.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-09-17 12:04:01.937592"], ["updated_at", "2018-09-17 12:04:01.937592"]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (108.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateCategories (20180917120451)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20180917120451_create_categories.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20180917120451_create_categories.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180917120451"]]
+  ↳ bin/rails:9
+  [1m[35m (124.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateArticles (20180917121344)
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "articles" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "category_id" integer, "title" varchar, "lien" varchar, "image_url" varchar, "icon_url" varchar, "description" varchar, "tuto" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_af09d53ead"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  ↳ db/migrate/20180917121344_create_articles.rb:3
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_articles_on_category_id" ON "articles" ("category_id")[0m
+  ↳ db/migrate/20180917121344_create_articles.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180917121344"]]
+  ↳ bin/rails:9
+  [1m[35m (109.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Category_O1"], ["created_at", "2018-09-17 12:19:47.992148"], ["updated_at", "2018-09-17 12:19:47.992148"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (114.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Category_O2"], ["created_at", "2018-09-17 12:19:48.110761"], ["updated_at", "2018-09-17 12:19:48.110761"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (81.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[36mCategory Create (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Category_O3"], ["created_at", "2018-09-17 12:19:48.199326"], ["updated_at", "2018-09-17 12:19:48.199326"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (93.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[36mCategory Create (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Category_O4"], ["created_at", "2018-09-17 12:19:48.300219"], ["updated_at", "2018-09-17 12:19:48.300219"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (103.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Category_O5"], ["created_at", "2018-09-17 12:19:48.409639"], ["updated_at", "2018-09-17 12:19:48.409639"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (94.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[36mCategory Create (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Category_O6"], ["created_at", "2018-09-17 12:19:48.509125"], ["updated_at", "2018-09-17 12:19:48.509125"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (83.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Category_O7"], ["created_at", "2018-09-17 12:19:48.596409"], ["updated_at", "2018-09-17 12:19:48.596409"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (73.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Category_O8"], ["created_at", "2018-09-17 12:19:48.676987"], ["updated_at", "2018-09-17 12:19:48.676987"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (152.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Category_O9"], ["created_at", "2018-09-17 12:19:48.832837"], ["updated_at", "2018-09-17 12:19:48.832837"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (92.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:10
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Category_O10"], ["created_at", "2018-09-17 12:19:48.928779"], ["updated_at", "2018-09-17 12:19:48.928779"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (95.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:10
+Started GET "/" for 127.0.0.1 at 2018-09-17 15:21:32 +0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 462ms (Views: 453.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-17 15:25:23 +0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 245ms (Views: 235.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 15:25:25 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:20
+  Rendered articles/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 36ms (Views: 34.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:26:11 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (128.6ms)
+  Rendered articles/new.html.erb within layouts/application (130.2ms)
+Completed 200 OK in 188ms (Views: 158.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:34:20 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (330.2ms)
+  Rendered articles/new.html.erb within layouts/application (331.5ms)
+Completed 500 Internal Server Error in 341ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `f' for #<#<Class:0x00007f3e2d51f668>:0x00007f3e2ca02668>):
+    13: 
+    14:   <div class="field">
+    15:     <%= form.label :category_id %>
+    16:     <%= f.collection_select :category_id, Category.order(:name),:id,:name%>
+    17:   </div>
+    18: 
+    19:   <div class="field">
+  
+app/views/articles/_form.html.erb:16:in `block in _app_views_articles__form_html_erb__501168896045417189_69952402668800'
+app/views/articles/_form.html.erb:1:in `_app_views_articles__form_html_erb__501168896045417189_69952402668800'
+app/views/articles/new.html.erb:3:in `_app_views_articles_new_html_erb___1219945771280056694_69952402628120'
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 15:36:59 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:20
+  Rendered articles/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 63ms (Views: 59.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:37:01 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (2.9ms)
+  Rendered articles/new.html.erb within layouts/application (5.4ms)
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 0.0ms)
+
+
+  
+SyntaxError (/home/mirantsoa/Documents/Gasyte_Scaffold/app/views/articles/_form.html.erb:17: syntax error, unexpected ','
+...ffer.append=( f.select :name, , :prompt => 'Select One' );@o...
+...                              ^):
+  
+app/views/articles/_form.html.erb:17: syntax error, unexpected ','
+app/views/articles/new.html.erb:3:in `_app_views_articles_new_html_erb___1219945771280056694_69952474883720'
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 15:40:22 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:20
+  Rendered articles/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 71ms (Views: 66.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:40:24 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (2.7ms)
+  Rendered articles/new.html.erb within layouts/application (6.1ms)
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 0.0ms)
+
+
+  
+SyntaxError (/home/mirantsoa/Documents/Gasyte_Scaffold/app/views/articles/_form.html.erb:18: syntax error, unexpected ':', expecting ')'
+...=( f.select :all_val, options :prompt => 'Select One' );@out...
+...                              ^):
+  
+app/views/articles/_form.html.erb:18: syntax error, unexpected ':', expecting ')'
+app/views/articles/new.html.erb:3:in `_app_views_articles_new_html_erb___1219945771280056694_69952473899960'
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:40:45 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (8.3ms)
+  Rendered articles/new.html.erb within layouts/application (9.9ms)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `all' for nil:NilClass):
+    14:   <div class="field">
+    15:     <%= form.label :category_id %>
+    16:     <%= form.text_field :category_id %>
+    17:     <% options = options_from_collection_for_select(@Categories.all, 'id', 'name') %>
+    18:     <%= f.select :all_val, options, :prompt => 'Select One' %>
+    19:   </div>
+    20: 
+  
+app/views/articles/_form.html.erb:17:in `block in _app_views_articles__form_html_erb__501168896045417189_69952402070060'
+app/views/articles/_form.html.erb:1:in `_app_views_articles__form_html_erb__501168896045417189_69952402070060'
+app/views/articles/new.html.erb:3:in `_app_views_articles_new_html_erb___1219945771280056694_69952402126140'
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:41:00 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (14.2ms)
+  Rendered articles/new.html.erb within layouts/application (15.7ms)
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (uninitialized constant ActionView::CompiledTemplates::Categories):
+    14:   <div class="field">
+    15:     <%= form.label :category_id %>
+    16:     <%= form.text_field :category_id %>
+    17:     <% options = options_from_collection_for_select(Categories.all, 'id', 'name') %>
+    18:     <%= f.select :all_val, options, :prompt => 'Select One' %>
+    19:   </div>
+    20: 
+  
+app/views/articles/_form.html.erb:17:in `block in _app_views_articles__form_html_erb__501168896045417189_69952402517780'
+app/views/articles/_form.html.erb:1:in `_app_views_articles__form_html_erb__501168896045417189_69952402517780'
+app/views/articles/new.html.erb:3:in `_app_views_articles_new_html_erb___1219945771280056694_69952402651860'
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:41:29 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (377.0ms)
+  Rendered articles/new.html.erb within layouts/application (379.4ms)
+Completed 500 Internal Server Error in 391ms (ActiveRecord: 2.1ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `f' for #<#<Class:0x00007f3e2d51f668>:0x00007f3e2d10c300>):
+    15:     <%= form.label :category_id %>
+    16:     <%= form.text_field :category_id %>
+    17:     <% options = options_from_collection_for_select(Category.all, 'id', 'name') %>
+    18:     <%= f.select :all_val, options, :prompt => 'Select One' %>
+    19:   </div>
+    20: 
+    21:   <div class="field">
+  
+app/views/articles/_form.html.erb:18:in `block in _app_views_articles__form_html_erb__501168896045417189_69952510187700'
+app/views/articles/_form.html.erb:1:in `_app_views_articles__form_html_erb__501168896045417189_69952510187700'
+app/views/articles/new.html.erb:3:in `_app_views_articles_new_html_erb___1219945771280056694_69952510363900'
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:41:44 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (31.3ms)
+  Rendered articles/new.html.erb within layouts/application (34.3ms)
+Completed 200 OK in 110ms (Views: 101.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:43:11 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (4.8ms)
+  Rendered articles/new.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 76ms (Views: 74.0ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-17 15:43:32 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ohx23T+oHOSVenTf+KF80PpgAcdwbAbPSCYmdFBIOUMD5wuH5GoiTpePqAWykfKe0i4K2OyyolSJz6IgmLKBdA==", "article"=>{"all_val"=>"1", "title"=>"aponga", "lien"=>"www.aponga.com", "image_url"=>"aponga.png", "icon_url"=>"aponga-Convertimage.png", "description"=>"reztyuioup", "tuto"=>"creer une compte aponga"}, "commit"=>"Create Article"}
+Unpermitted parameter: :all_val
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (5.5ms)
+  Rendered articles/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 66ms (Views: 44.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 15:44:04 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:20
+  Rendered articles/index.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 90ms (Views: 86.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:44:07 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (10.7ms)
+  Rendered articles/new.html.erb within layouts/application (12.6ms)
+Completed 200 OK in 67ms (Views: 64.4ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-17 15:44:28 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"NZkp9WFZRjhE6XEn2/e60Cbk9hyN5YmVwZ5D5ihP6hPeXvzfC+2T1Yn1fl2Y0IlZGy+Exgu9k86pR+U4uLn5Pg==", "article"=>{"all_val"=>"1", "title"=>"aponga", "lien"=>"www.aponga.com", "image_url"=>"aponga.png", "icon_url"=>"aponga-Convertimage.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"creer une compte aponga"}, "commit"=>"Create Article"}
+Unpermitted parameter: :all_val
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.7ms)[0m  [1m[31mrollback transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (7.1ms)
+  Rendered articles/new.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 96ms (Views: 72.0ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 15:44:50 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:20
+  Rendered articles/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 48ms (Views: 46.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:44:53 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (10.9ms)
+  Rendered articles/new.html.erb within layouts/application (13.8ms)
+Completed 200 OK in 82ms (Views: 78.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 15:47:31 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (7.4ms)
+  Rendered articles/new.html.erb within layouts/application (13.5ms)
+Completed 200 OK in 62ms (Views: 60.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 16:01:09 +0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (35.9ms)
+  Rendered articles/new.html.erb within layouts/application (42.3ms)
+Completed 200 OK in 312ms (Views: 290.3ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-17 16:01:15 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QmqTMnwtdy9RuqtWyHHz+w/u65QkrzCNvnhfaOQny7p7ke5op+9JhVNPd4yCQX21J6Dgi7hxlBZ/kds8LN1zjQ==", "commit"=>"Create Article"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:30
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/articles_controller.rb:30
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (1.4ms)
+  Rendered articles/new.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 61ms (Views: 39.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 16:01:18 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 47ms (Views: 42.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 16:01:20 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (3.8ms)
+  Rendered articles/new.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 60ms (Views: 55.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 16:01:50 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (42.4ms)
+  Rendered articles/new.html.erb within layouts/application (50.3ms)
+Completed 200 OK in 118ms (Views: 113.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 16:02:24 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (25.6ms)
+  Rendered articles/new.html.erb within layouts/application (26.8ms)
+Completed 200 OK in 69ms (Views: 65.8ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-17 16:02:47 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"3kyQgDS2h3o389H+t4kZTB+xxTIOLtOYvAnL5p0ueW3nt+3a73S50DUGDST9uZcCN//OLZLwdwN94E+yVdTBWg==", "article"=>{"all_val"=>"1", "title"=>"aponga", "lien"=>"www.aponga.com", "image_url"=>"aponga.png", "icon_url"=>"aponga-Convertimage.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"creer une compte aponga"}, "commit"=>"Create Article"}
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/articles_controller.rb:27:in `create'
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 16:05:17 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 42ms (Views: 38.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 16:05:19 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (19.3ms)
+  Rendered articles/new.html.erb within layouts/application (21.0ms)
+Completed 200 OK in 85ms (Views: 61.8ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-17 16:05:40 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TTQ657XpVB2oS0HRXGhYsxxiU6QToQjizK5PmWBb8Tem8+/N312B8GVXTqsfT2s6IakhfpX5Ermkd+lH8K3iGg==", "article"=>{"category"=>"6", "title"=>"aponga", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"dfsghfjk", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:30
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/articles_controller.rb:30
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (6.1ms)
+  Rendered articles/new.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 65ms (Views: 54.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 16:11:04 +0300
+  
+SyntaxError (/home/mirantsoa/Documents/Gasyte_Scaffold/app/controllers/articles_controller.rb:27: syntax error, unexpected tIDENTIFIER, expecting ')'
+...cle.new(params[:article]_params)
+...                        ^~~~~~~):
+  
+app/controllers/articles_controller.rb:27: syntax error, unexpected tIDENTIFIER, expecting ')'
+Started POST "/articles" for 127.0.0.1 at 2018-09-17 16:14:08 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/8r+tFgCgtJT/E39mPIvNb5G1NKu575RWvbNwbgK+6PGMYPug8C8eFEJkSfSwqF7lgjfzTI5GsqbH0mVcPBDlA==", "article"=>{"category"=>"6", "title"=>"aponga", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"dfsghfjk", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.8ms)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Category(#70270878302100) expected, got "6" which is an instance of String(#47127576567320)):
+  
+app/controllers/articles_controller.rb:28:in `create'
+Started POST "/articles" for 127.0.0.1 at 2018-09-17 16:14:48 +0300
+  
+SyntaxError (/home/mirantsoa/Documents/Gasyte_Scaffold/app/controllers/articles_controller.rb:28: syntax error, unexpected ',', expecting '('
+...ategory_id: parama[:category]., title: parama[:title], lien:...
+...                              ^
+/home/mirantsoa/Documents/Gasyte_Scaffold/app/controllers/articles_controller.rb:28: syntax error, unexpected tLABEL, expecting '='
+...., title: parama[:title], lien: parama[:lien], image_url: pa...
+...                          ^~~~~
+/home/mirantsoa/Documents/Gasyte_Scaffold/app/controllers/articles_controller.rb:28: syntax error, unexpected tLABEL, expecting '='
+...lien: parama[:lien], image_url: parama[:image_url],icon_url:...
+...                     ^~~~~~~~~~
+/home/mirantsoa/Documents/Gasyte_Scaffold/app/controllers/articles_controller.rb:28: syntax error, unexpected tLABEL, expecting '='
+...l: parama[:image_url],icon_url: parama[:icon_url],descriptio...
+...                      ^~~~~~~~~
+/home/mirantsoa/Documents/Gasyte_Scaffold/app/controllers/articles_controller.rb:28: syntax error, unexpected tLABEL, expecting '='
+... parama[:icon_url],description: parama[:description], tuto:p...
+...                   ^~~~~~~~~~~~
+/home/mirantsoa/Documents/Gasyte_Scaffold/app/controllers/articles_controller.rb:28: syntax error, unexpected tLABEL, expecting '='
+...on: parama[:description], tuto:parama[:tuto])
+...                          ^~~~~
+/home/mirantsoa/Documents/Gasyte_Scaffold/app/controllers/articles_controller.rb:28: syntax error, unexpected ')', expecting keyword_end
+...scription], tuto:parama[:tuto])
+...                              ^):
+  
+app/controllers/articles_controller.rb:28: syntax error, unexpected ',', expecting '('
+app/controllers/articles_controller.rb:28: syntax error, unexpected tLABEL, expecting '='
+app/controllers/articles_controller.rb:28: syntax error, unexpected tLABEL, expecting '='
+app/controllers/articles_controller.rb:28: syntax error, unexpected tLABEL, expecting '='
+app/controllers/articles_controller.rb:28: syntax error, unexpected tLABEL, expecting '='
+app/controllers/articles_controller.rb:28: syntax error, unexpected tLABEL, expecting '='
+app/controllers/articles_controller.rb:28: syntax error, unexpected ')', expecting keyword_end
+Started POST "/articles" for 127.0.0.1 at 2018-09-17 16:15:11 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/8r+tFgCgtJT/E39mPIvNb5G1NKu575RWvbNwbgK+6PGMYPug8C8eFEJkSfSwqF7lgjfzTI5GsqbH0mVcPBDlA==", "article"=>{"category"=>"6", "title"=>"aponga", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"dfsghfjk", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:31
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:31
+  [1m[36mArticle Create (0.4ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 6], ["title", "aponga"], ["lien", "www.github.com"], ["image_url", "Github.png"], ["icon_url", "GitHub-Mark-64px.png"], ["description", "dfsghfjk"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-17 13:15:11.984554"], ["updated_at", "2018-09-17 13:15:11.984554"]]
+  ↳ app/controllers/articles_controller.rb:31
+  [1m[35m (146.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:31
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 203ms (ActiveRecord: 149.4ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2018-09-17 16:15:12 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.7ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:68
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 87ms (Views: 80.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 16:16:27 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 37ms (Views: 34.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2018-09-17 16:16:32 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:68
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 47ms (Views: 41.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/1/edit" for 127.0.0.1 at 2018-09-17 16:16:36 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:68
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (8.9ms)
+  Rendered articles/edit.html.erb within layouts/application (10.5ms)
+Completed 200 OK in 56ms (Views: 49.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/1/edit" for 127.0.0.1 at 2018-09-17 16:17:04 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:68
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (9.9ms)
+  Rendered articles/edit.html.erb within layouts/application (12.5ms)
+Completed 200 OK in 68ms (Views: 61.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/articles/1/edit" for 127.0.0.1 at 2018-09-17 16:18:42 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:68
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (14.6ms)
+  Rendered articles/edit.html.erb within layouts/application (21.5ms)
+Completed 200 OK in 69ms (Views: 62.3ms | ActiveRecord: 1.1ms)
+
+
+Started PATCH "/articles/1" for 127.0.0.1 at 2018-09-17 16:18:46 +0300
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"r+8+jDvQ4EUVMuQP6UwUbSuYqOlECDqG9g0PE6+3eXYRokEGR3umZDQhOVaFf13bJAGSFC+wdEIEnLF7XC4yxg==", "article"=>{"category"=>"1", "title"=>"aponga", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"dfsghfjk", "tuto"=>"dqsfsghjkl"}, "commit"=>"Update Article", "id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:68
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:45
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/articles_controller.rb:45
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/articles_controller.rb:45:in `block in update'
+app/controllers/articles_controller.rb:44:in `update'
+Started GET "/articles/1" for 127.0.0.1 at 2018-09-17 16:19:08 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:68
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 49ms (Views: 43.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 16:22:25 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 46ms (Views: 43.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 16:22:27 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (15.0ms)
+  Rendered articles/new.html.erb within layouts/application (16.3ms)
+Completed 200 OK in 63ms (Views: 60.1ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-17 16:22:44 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kwqhaNvVxA/wrhbGqBWDuCvKwzSYaXa/DPwFZGN9hwN4zXRCsWER4j2yGbzrMrAxFgGx7h4xbORkJaO684uULg==", "article"=>{"category"=>"3", "title"=>"aponga", "lien"=>"www.aponga.com", "image_url"=>"aponga.png", "icon_url"=>"aponga-Convertimage.png", "description"=>"dfsghfjk", "tuto"=>"creer une compte aponga"}, "commit"=>"Create Article"}
+  [1m[35m (0.7ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:31
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:31
+  [1m[36mArticle Create (7.6ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 3], ["title", "aponga"], ["lien", "www.aponga.com"], ["image_url", "aponga.png"], ["icon_url", "aponga-Convertimage.png"], ["description", "dfsghfjk"], ["tuto", "creer une compte aponga"], ["created_at", "2018-09-17 13:22:44.840025"], ["updated_at", "2018-09-17 13:22:44.840025"]]
+  ↳ app/controllers/articles_controller.rb:31
+  [1m[35m (394.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:31
+Redirected to http://localhost:3000/articles/2
+Completed 302 Found in 421ms (ActiveRecord: 403.6ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-09-17 16:22:45 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:68
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 60ms (Views: 48.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/2/edit" for 127.0.0.1 at 2018-09-17 16:22:49 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:68
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (11.7ms)
+  Rendered articles/edit.html.erb within layouts/application (17.5ms)
+Completed 200 OK in 65ms (Views: 58.5ms | ActiveRecord: 0.8ms)
+
+
+Started PATCH "/articles/2" for 127.0.0.1 at 2018-09-17 16:22:58 +0300
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"i1XgB0THvVQE1rtkL1bKHeHp4YgddnBmBnccEH/Ln3Vvzug0bU+Q5EKj0PsRExukF9LoO2SCGM4y2LJNb/y3jg==", "article"=>{"category"=>"1", "title"=>"aponga", "lien"=>"www.aponga.com", "image_url"=>"aponga.jpg", "icon_url"=>"aponga-Convertimage.png", "description"=>"dfsghfjk", "tuto"=>"creer une compte aponga"}, "commit"=>"Update Article", "id"=>"2"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:68
+Completed 500 Internal Server Error in 226ms (ActiveRecord: 0.4ms)
+
+
+  
+NameError (undefined local variable or method `parama' for #<ArticlesController:0x00007fd268104dd8>
+Did you mean?  params
+               params=
+               @_params):
+  
+app/controllers/articles_controller.rb:45:in `block in update'
+app/controllers/articles_controller.rb:44:in `update'
+Started PATCH "/articles/2" for 127.0.0.1 at 2018-09-17 16:23:42 +0300
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"i1XgB0THvVQE1rtkL1bKHeHp4YgddnBmBnccEH/Ln3Vvzug0bU+Q5EKj0PsRExukF9LoO2SCGM4y2LJNb/y3jg==", "article"=>{"category"=>"1", "title"=>"aponga", "lien"=>"www.aponga.com", "image_url"=>"aponga.jpg", "icon_url"=>"aponga-Convertimage.png", "description"=>"dfsghfjk", "tuto"=>"creer une compte aponga"}, "commit"=>"Update Article", "id"=>"2"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:46
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:46
+  [1m[36mArticle Update (0.5ms)[0m  [1m[33mUPDATE "articles" SET "category_id" = ?, "image_url" = ?, "updated_at" = ? WHERE "articles"."id" = ?[0m  [["category_id", 1], ["image_url", "aponga.jpg"], ["updated_at", "2018-09-17 13:23:42.443542"], ["id", 2]]
+  ↳ app/controllers/articles_controller.rb:46
+  [1m[35m (85.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:46
+Redirected to http://localhost:3000/articles/2
+Completed 302 Found in 110ms (ActiveRecord: 87.4ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-09-17 16:23:42 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:69
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 85ms (Views: 79.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 16:24:34 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 44ms (Views: 42.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2018-09-17 16:24:44 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:69
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 34ms (Views: 32.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 16:24:50 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 48ms (Views: 46.7ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/articles/1" for 127.0.0.1 at 2018-09-17 16:24:55 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"x0QRHKQgnmncRFgM9KRiMiL5b6de7CBHK42ilN7p1sz+v2xGf+Kgw96xhNa+lOx8CrdkuMIyhNzqZCbAFhNu+w==", "id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:59
+  [1m[36mArticle Destroy (0.3ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/articles_controller.rb:59
+  [1m[35m (102.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:59
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 115ms (ActiveRecord: 103.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-17 16:24:55 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 79ms (Views: 76.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 16:27:02 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (16.6ms)
+  Rendered articles/new.html.erb within layouts/application (17.9ms)
+Completed 200 OK in 49ms (Views: 47.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-17 16:27:08 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (5.7ms)
+  Rendered articles/new.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 45ms (Views: 43.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 09:22:43 +0300
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (21.3ms)
+Completed 200 OK in 720ms (Views: 697.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:22:48 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (40.1ms)
+Completed 200 OK in 123ms (Views: 74.4ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-18 09:22:51 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (360.0ms)
+  Rendered articles/new.html.erb within layouts/application (376.3ms)
+Completed 200 OK in 425ms (Views: 397.1ms | ActiveRecord: 2.8ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:23:38 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"y66HotWnJl1oAq5hzUsGqoqCKeugGorjbd5gRFLMWHXQ+5UpqF1rW7xRuX1mj0Kfi5xGjplJ5eVHioohVXnsJw==", "article"=>{"category"=>"3", "title"=>"W3school", "lien"=>"www.w3school.com", "image_url"=>"w3school.png", "icon_url"=>"w3school_icon.png", "description"=>"reztyuioup", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mArticle Create (25.6ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 3], ["title", "W3school"], ["lien", "www.w3school.com"], ["image_url", "w3school.png"], ["icon_url", "w3school_icon.png"], ["description", "reztyuioup"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:23:38.502645"], ["updated_at", "2018-09-18 06:23:38.502645"]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[35m (137.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+Redirected to http://localhost:3000/articles/3
+Completed 302 Found in 235ms (ActiveRecord: 164.2ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-09-18 09:23:38 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  Rendered articles/show.html.erb within layouts/application (28.4ms)
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 1.2ms)
+
+
+  
+ActionView::Template::Error (undefined method `title' for #<Article::ActiveRecord_Relation:0x00007f210ce15850>):
+    1: <p id="notice"><%= notice %></p>
+    2: <%= @articles.title %>
+    3: <%= link_to 'Edit', edit_article_path(@article) %> |
+    4: <%= link_to 'Back', articles_path %>
+  
+app/views/articles/show.html.erb:2:in `_app_views_articles_show_html_erb__4056840002182566359_69890057288720'
+Started GET "/articles/3" for 127.0.0.1 at 2018-09-18 09:25:57 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 42ms (Views: 38.6ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:26:32 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kXHyhuYtw/3t80tiapHb6OZEfKLJrZ3IDmYELovjPspZx09n0sdJLPKBXGVdfiSPNOoarwL6woovPgPi9pAiVw==", "article"=>{"category"=>"3", "title"=>"W3school", "lien"=>"www.w3school.com", "image_url"=>"w3school.png", "icon_url"=>"w3school_icon.png", "description"=>"reztyuioup", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mArticle Create (0.3ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 3], ["title", "W3school"], ["lien", "www.w3school.com"], ["image_url", "w3school.png"], ["icon_url", "w3school_icon.png"], ["description", "reztyuioup"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:26:32.069089"], ["updated_at", "2018-09-18 06:26:32.069089"]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[35m (109.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+Redirected to http://localhost:3000/articles/4
+Completed 302 Found in 119ms (ActiveRecord: 109.6ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 09:26:32 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 52ms (Views: 47.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:26:47 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kXHyhuYtw/3t80tiapHb6OZEfKLJrZ3IDmYELovjPspZx09n0sdJLPKBXGVdfiSPNOoarwL6woovPgPi9pAiVw==", "article"=>{"category"=>"3", "title"=>"W3school", "lien"=>"www.w3school.com", "image_url"=>"w3school.png", "icon_url"=>"w3school_icon.png", "description"=>"reztyuioup", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mArticle Create (0.8ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 3], ["title", "W3school"], ["lien", "www.w3school.com"], ["image_url", "w3school.png"], ["icon_url", "w3school_icon.png"], ["description", "reztyuioup"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:26:47.767905"], ["updated_at", "2018-09-18 06:26:47.767905"]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[35m (117.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+Redirected to http://localhost:3000/articles/5
+Completed 302 Found in 141ms (ActiveRecord: 118.9ms)
+
+
+Started GET "/articles/5" for 127.0.0.1 at 2018-09-18 09:26:47 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 86ms (Views: 82.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/5/edit" for 127.0.0.1 at 2018-09-18 09:28:06 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (9.8ms)
+  Rendered articles/edit.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 64ms (Views: 44.4ms | ActiveRecord: 0.8ms)
+
+
+Started PATCH "/articles/5" for 127.0.0.1 at 2018-09-18 09:28:11 +0300
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tOylmYjXeJLmd+OmNauAR9yAGFFM5JqReOC5W1aYf+qamTe2kLU4gRhgTtLDUHqr9mYyTyJPFLNLCccxn8cvsA==", "article"=>{"category"=>"1", "title"=>"W3school", "lien"=>"www.w3school.com", "image_url"=>"w3school.png", "icon_url"=>"w3school_icon.png", "description"=>"reztyuioup", "tuto"=>"dqsfsghjkl"}, "commit"=>"Update Article", "id"=>"5"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:47
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:47
+  [1m[36mArticle Update (0.3ms)[0m  [1m[33mUPDATE "articles" SET "category_id" = ?, "updated_at" = ? WHERE "articles"."id" = ?[0m  [["category_id", 1], ["updated_at", "2018-09-18 06:28:11.033678"], ["id", 5]]
+  ↳ app/controllers/articles_controller.rb:47
+  [1m[35m (87.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:47
+Redirected to http://localhost:3000/articles/5
+Completed 302 Found in 98ms (ActiveRecord: 88.3ms)
+
+
+Started GET "/articles/5" for 127.0.0.1 at 2018-09-18 09:28:11 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 42ms (Views: 38.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:28:12 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 55ms (Views: 50.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-09-18 09:28:16 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 44ms (Views: 40.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:28:21 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.8ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 63ms (Views: 58.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 09:28:23 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 36ms (Views: 33.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:28:25 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 40ms (Views: 38.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/5" for 127.0.0.1 at 2018-09-18 09:28:27 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 38ms (Views: 35.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:28:29 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.8ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 63ms (Views: 59.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-18 09:28:33 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (3.7ms)
+  Rendered articles/new.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 38ms (Views: 36.1ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:28:58 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"nULTcZLGQpbVn9gRDE/PzZlcJ/8+Oxn5KGf1tr8MOIyGF8H67zwPkAHMzw2ni4v4mEJImgdodv8CMx/TuLmM3g==", "article"=>{"category"=>"9", "title"=>"Github", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mArticle Create (0.2ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 9], ["title", "Github"], ["lien", "www.github.com"], ["image_url", "Github.png"], ["icon_url", "GitHub-Mark-64px.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:28:58.048984"], ["updated_at", "2018-09-18 06:28:58.048984"]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[35m (242.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+Redirected to http://localhost:3000/articles/6
+Completed 302 Found in 250ms (ActiveRecord: 242.9ms)
+
+
+Started GET "/articles/6" for 127.0.0.1 at 2018-09-18 09:28:58 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 46ms (Views: 41.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:29:03 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 36ms (Views: 34.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-09-18 09:30:29 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  Rendered articles/show.html.erb within layouts/application (8.8ms)
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 1.2ms)
+
+
+  
+ActionView::Template::Error (undefined method `title' for #<Article::ActiveRecord_Relation:0x00007f210d263f88>):
+    1: <p id="notice"><%= notice %></p>
+    2: <%= @article.title %>
+    3: <%= link_to 'Edit', edit_article_path(@article) %> |
+    4: <%= link_to 'Back', articles_path %>
+  
+app/views/articles/show.html.erb:2:in `_app_views_articles_show_html_erb__4056840002182566359_69889965603780'
+Started GET "/articles/2" for 127.0.0.1 at 2018-09-18 09:31:19 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (4.8ms)
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionView::Template::Error (undefined method `title' for nil:NilClass):
+    1: <p id="notice"><%= notice %></p>
+    2: <%= @article.title %>
+    3: <%= link_to 'Edit', edit_article_path(@article) %> |
+    4: <%= link_to 'Back', articles_path %>
+  
+app/views/articles/show.html.erb:2:in `_app_views_articles_show_html_erb__4056840002182566359_69889756151900'
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:31:27 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5D5ag3LC+3D7zHLwLjPiLKHNqnJ+2uOsctdM68WgN4EsiOdiRihxoeS+ZfcZ3B1Lc2PMf7WNvO5Tj0snuNMrHA==", "article"=>{"category"=>"9", "title"=>"Github", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mArticle Create (0.7ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 9], ["title", "Github"], ["lien", "www.github.com"], ["image_url", "Github.png"], ["icon_url", "GitHub-Mark-64px.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:31:27.683532"], ["updated_at", "2018-09-18 06:31:27.683532"]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[35m (89.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+Redirected to http://localhost:3000/articles/7
+Completed 302 Found in 121ms (ActiveRecord: 92.8ms)
+
+
+Started GET "/articles/7" for 127.0.0.1 at 2018-09-18 09:31:27 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (5.6ms)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (undefined method `title' for nil:NilClass):
+    1: <p id="notice"><%= notice %></p>
+    2: <%= @article.title %>
+    3: <%= link_to 'Edit', edit_article_path(@article) %> |
+    4: <%= link_to 'Back', articles_path %>
+  
+app/views/articles/show.html.erb:2:in `_app_views_articles_show_html_erb__4056840002182566359_69889960556740'
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:31:51 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5D5ag3LC+3D7zHLwLjPiLKHNqnJ+2uOsctdM68WgN4EsiOdiRihxoeS+ZfcZ3B1Lc2PMf7WNvO5Tj0snuNMrHA==", "article"=>{"category"=>"9", "title"=>"Github", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mArticle Create (0.6ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 9], ["title", "Github"], ["lien", "www.github.com"], ["image_url", "Github.png"], ["icon_url", "GitHub-Mark-64px.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:31:51.641145"], ["updated_at", "2018-09-18 06:31:51.641145"]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[35m (115.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+Redirected to http://localhost:3000/articles/8
+Completed 302 Found in 136ms (ActiveRecord: 117.1ms)
+
+
+Started GET "/articles/8" for 127.0.0.1 at 2018-09-18 09:31:51 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (3.8ms)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.3ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"edit", :controller=>"articles", :id=>nil}, missing required keys: [:id]):
+    1: <p id="notice"><%= notice %></p>
+    2: <%= @article %>
+    3: <%= link_to 'Edit', edit_article_path(@article) %> |
+    4: <%= link_to 'Back', articles_path %>
+  
+app/views/articles/show.html.erb:3:in `_app_views_articles_show_html_erb__4056840002182566359_69889755196540'
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:32:10 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5D5ag3LC+3D7zHLwLjPiLKHNqnJ+2uOsctdM68WgN4EsiOdiRihxoeS+ZfcZ3B1Lc2PMf7WNvO5Tj0snuNMrHA==", "article"=>{"category"=>"9", "title"=>"Github", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mArticle Create (2.1ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 9], ["title", "Github"], ["lien", "www.github.com"], ["image_url", "Github.png"], ["icon_url", "GitHub-Mark-64px.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:32:10.672657"], ["updated_at", "2018-09-18 06:32:10.672657"]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[35m (118.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+Redirected to http://localhost:3000/articles/9
+Completed 302 Found in 136ms (ActiveRecord: 121.1ms)
+
+
+Started GET "/articles/9" for 127.0.0.1 at 2018-09-18 09:32:10 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.3ms)
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.1ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"edit", :controller=>"articles", :id=>nil}, missing required keys: [:id]):
+    1: <p id="notice"><%= notice %></p>
+    2: <%= @article %>
+    3: <%= link_to 'Edit', edit_article_path(@article) %> 
+    4: <%= link_to 'Back', articles_path %>
+  
+app/views/articles/show.html.erb:3:in `_app_views_articles_show_html_erb__4056840002182566359_69890060923600'
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:32:58 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5D5ag3LC+3D7zHLwLjPiLKHNqnJ+2uOsctdM68WgN4EsiOdiRihxoeS+ZfcZ3B1Lc2PMf7WNvO5Tj0snuNMrHA==", "article"=>{"category"=>"9", "title"=>"Github", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mArticle Create (1.7ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 9], ["title", "Github"], ["lien", "www.github.com"], ["image_url", "Github.png"], ["icon_url", "GitHub-Mark-64px.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:32:58.376973"], ["updated_at", "2018-09-18 06:32:58.376973"]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[35m (128.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+Redirected to http://localhost:3000/articles/10
+Completed 302 Found in 165ms (ActiveRecord: 134.1ms)
+
+
+Started GET "/articles/10" for 127.0.0.1 at 2018-09-18 09:32:58 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 83ms (Views: 77.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:34:04 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 37ms (Views: 34.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-09-18 09:34:05 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Article without an ID):
+  
+app/controllers/articles_controller.rb:13:in `show'
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:35:36 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 65ms (Views: 61.1ms | ActiveRecord: 2.0ms)
+
+
+Started DELETE "/articles/2" for 127.0.0.1 at 2018-09-18 09:35:41 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"6wWK9kB/bDwWNSuPdAOIwtM9xtSWU4o5TcBEQ+btEeYjszcXdJXm7QlHPIhD7HelAZOg2V0E1XtsmEOPm54New==", "id"=>"2"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:60
+  [1m[36mArticle Destroy (0.9ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 2]]
+  ↳ app/controllers/articles_controller.rb:60
+  [1m[35m (83.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:60
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 93ms (ActiveRecord: 84.8ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:35:41 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 56ms (Views: 53.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-09-18 09:36:36 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  Rendered articles/show.html.erb within layouts/application (371.6ms)
+Completed 500 Internal Server Error in 377ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `article' for #<#<Class:0x00007f210d9f5440>:0x00007f211893ce80>
+Did you mean?  @article):
+    1: <p id="notice"><%= notice %></p>
+    2: <%= article.title %>
+    3: <%= link_to 'Edit', edit_article_path(@article) %> 
+    4: <%= link_to 'Back', articles_path %>
+  
+app/views/articles/show.html.erb:2:in `_app_views_articles_show_html_erb__4056840002182566359_69890061495360'
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:36:42 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (14.1ms)
+Completed 200 OK in 73ms (Views: 69.4ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-09-18 09:36:44 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  Rendered articles/show.html.erb within layouts/application (20.0ms)
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (undefined method `title' for #<Article::ActiveRecord_Relation:0x00007f210db79348>):
+    1: <p id="notice"><%= notice %></p>
+    2: <%= @article.title %>
+    3: <%= link_to 'Edit', edit_article_path(@article) %> 
+    4: <%= link_to 'Back', articles_path %>
+  
+app/views/articles/show.html.erb:2:in `_app_views_articles_show_html_erb__4056840002182566359_69889970389220'
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:39:06 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 54ms (Views: 52.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/10" for 127.0.0.1 at 2018-09-18 09:41:55 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  Rendered articles/show.html.erb within layouts/application (16.8ms)
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (undefined method `title' for #<Article::ActiveRecord_Relation:0x00007f2118228dd8>):
+    1: <p id="notice"><%= notice %></p>
+    2: <%= @article.title %>
+    3: <%= link_to 'Edit', edit_article_path(@article) %> 
+    4: <%= link_to 'Back', articles_path %>
+  
+app/views/articles/show.html.erb:2:in `_app_views_articles_show_html_erb__4056840002182566359_69890057764360'
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:42:11 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5D5ag3LC+3D7zHLwLjPiLKHNqnJ+2uOsctdM68WgN4EsiOdiRihxoeS+ZfcZ3B1Lc2PMf7WNvO5Tj0snuNMrHA==", "article"=>{"category"=>"9", "title"=>"Github", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[36mArticle Create (0.4ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 9], ["title", "Github"], ["lien", "www.github.com"], ["image_url", "Github.png"], ["icon_url", "GitHub-Mark-64px.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:42:11.535271"], ["updated_at", "2018-09-18 06:42:11.535271"]]
+  ↳ app/controllers/articles_controller.rb:32
+  [1m[35m (79.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:32
+Redirected to http://localhost:3000/articles/11
+Completed 302 Found in 121ms (ActiveRecord: 81.1ms)
+
+
+Started GET "/articles/11" for 127.0.0.1 at 2018-09-18 09:42:11 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 35ms (Views: 33.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:42:13 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (5.0ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `title' for nil:NilClass):
+    12:   <tbody>
+    13:     <% @articles.each do |article| %>
+    14:       <tr>
+    15:         <td><%= @article.title %></td>
+    16:         <td><%= link_to 'Show', article %></td>
+    17:         <td><%= link_to 'Edit', edit_article_path(article) %></td>
+    18:         <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  
+app/views/articles/index.html.erb:15:in `block in _app_views_articles_index_html_erb___433406407622205431_47200672392940'
+app/views/articles/index.html.erb:13:in `_app_views_articles_index_html_erb___433406407622205431_47200672392940'
+Started GET "/articles/11" for 127.0.0.1 at 2018-09-18 09:42:28 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:70
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 35ms (Views: 33.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:42:30 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (20.1ms)
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 1.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `title' for #<Article::ActiveRecord_Relation:0x00007f2110161e70>):
+    12:   <tbody>
+    13:     <% @articles.each do |article| %>
+    14:       <tr>
+    15:         <td><%= @articles.title %></td>
+    16:         <td><%= link_to 'Show', article %></td>
+    17:         <td><%= link_to 'Edit', edit_article_path(article) %></td>
+    18:         <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  
+app/views/articles/index.html.erb:15:in `block in _app_views_articles_index_html_erb___433406407622205431_69889990264200'
+app/views/articles/index.html.erb:13:in `_app_views_articles_index_html_erb___433406407622205431_69889990264200'
+Started GET "/articles/11" for 127.0.0.1 at 2018-09-18 09:47:44 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:80
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.6ms)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/controllers/articles_controller.rb:16:in `show'
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:47:48 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5D5ag3LC+3D7zHLwLjPiLKHNqnJ+2uOsctdM68WgN4EsiOdiRihxoeS+ZfcZ3B1Lc2PMf7WNvO5Tj0snuNMrHA==", "article"=>{"category"=>"9", "title"=>"Github", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[36mArticle Create (0.3ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 9], ["title", "Github"], ["lien", "www.github.com"], ["image_url", "Github.png"], ["icon_url", "GitHub-Mark-64px.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:47:49.023361"], ["updated_at", "2018-09-18 06:47:49.023361"]]
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[35m (114.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+Redirected to http://localhost:3000/articles/12
+Completed 302 Found in 153ms (ActiveRecord: 118.4ms)
+
+
+Started GET "/articles/12" for 127.0.0.1 at 2018-09-18 09:47:49 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:80
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.2ms)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/controllers/articles_controller.rb:16:in `show'
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:48:10 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5D5ag3LC+3D7zHLwLjPiLKHNqnJ+2uOsctdM68WgN4EsiOdiRihxoeS+ZfcZ3B1Lc2PMf7WNvO5Tj0snuNMrHA==", "article"=>{"category"=>"9", "title"=>"Github", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:41
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:41
+  [1m[36mArticle Create (0.7ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 9], ["title", "Github"], ["lien", "www.github.com"], ["image_url", "Github.png"], ["icon_url", "GitHub-Mark-64px.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:48:10.566264"], ["updated_at", "2018-09-18 06:48:10.566264"]]
+  ↳ app/controllers/articles_controller.rb:41
+  [1m[35m (136.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:41
+Redirected to http://localhost:3000/articles/13
+Completed 302 Found in 169ms (ActiveRecord: 139.0ms)
+
+
+Started GET "/articles/13" for 127.0.0.1 at 2018-09-18 09:48:10 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"13"}
+  [1m[36mArticle Load (1.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:79
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 1.1ms)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/controllers/articles_controller.rb:16:in `show'
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 09:49:31 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5D5ag3LC+3D7zHLwLjPiLKHNqnJ+2uOsctdM68WgN4EsiOdiRihxoeS+ZfcZ3B1Lc2PMf7WNvO5Tj0snuNMrHA==", "article"=>{"category"=>"9", "title"=>"Github", "lien"=>"www.github.com", "image_url"=>"Github.png", "icon_url"=>"GitHub-Mark-64px.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Create Article"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:39
+  [1m[36mArticle Create (0.3ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 9], ["title", "Github"], ["lien", "www.github.com"], ["image_url", "Github.png"], ["icon_url", "GitHub-Mark-64px.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "dqsfsghjkl"], ["created_at", "2018-09-18 06:49:31.549108"], ["updated_at", "2018-09-18 06:49:31.549108"]]
+  ↳ app/controllers/articles_controller.rb:39
+  [1m[35m (183.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+Redirected to http://localhost:3000/articles/14
+Completed 302 Found in 213ms (ActiveRecord: 185.5ms)
+
+
+Started GET "/articles/14" for 127.0.0.1 at 2018-09-18 09:49:31 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:77
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (3.1ms)
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"edit", :controller=>"articles", :id=>nil}, missing required keys: [:id]):
+    1: <p id="notice"><%= notice %></p>
+    2: <%= @article.title %>
+    3: <%= link_to 'Edit', edit_article_path(@article) %> 
+    4: <%= link_to 'Back', articles_path %>
+  
+app/views/articles/show.html.erb:3:in `_app_views_articles_show_html_erb__4056840002182566359_69889971237220'
+Started GET "/articles/14" for 127.0.0.1 at 2018-09-18 09:50:39 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:71
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 50ms (Views: 35.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:52:18 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (14.4ms)
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 1.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `title' for #<Article::ActiveRecord_Relation:0x00007f210db242f8>):
+    12:   <tbody>
+    13:     <% @articles.each do |article| %>
+    14:       <tr>
+    15:         <td><%= @articles.title %></td>
+    16:         <td><%= link_to 'Show', article %></td>
+    17:         <td><%= link_to 'Edit', edit_article_path(article) %></td>
+    18:         <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  
+app/views/articles/index.html.erb:15:in `block in _app_views_articles_index_html_erb___433406407622205431_69889970214000'
+app/views/articles/index.html.erb:13:in `_app_views_articles_index_html_erb___433406407622205431_69889970214000'
+Started GET "/articles/14" for 127.0.0.1 at 2018-09-18 09:52:41 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:72
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 38ms (Views: 34.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:52:43 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 33ms (Views: 31.7ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/articles/3" for 127.0.0.1 at 2018-09-18 09:52:46 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"cP9xvnymnlRYYGrWV2vEEfsS5ulffPIeKrIjKOGdlIG4ScxfSEwUhUcSfdFghDt2KbyA5JQrrVwL6iTknO6IHA==", "id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:72
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:62
+  [1m[36mArticle Destroy (0.3ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 3]]
+  ↳ app/controllers/articles_controller.rb:62
+  [1m[35m (119.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:62
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 128ms (ActiveRecord: 120.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 09:52:47 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 56ms (Views: 52.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:05:53 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:77
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 47ms (Views: 35.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:05:56 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.8ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (10.9ms)
+Completed 200 OK in 56ms (Views: 51.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/4/edit" for 127.0.0.1 at 2018-09-18 10:34:07 +0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:89
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 0.7ms)
+
+
+  
+NameError (uninitialized constant ArticlesController::Product):
+  
+app/controllers/articles_controller.rb:40:in `edit'
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:34:54 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:88
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 1.0ms)
+
+
+  
+NameError (uninitialized constant ArticlesController::Product):
+  
+app/controllers/articles_controller.rb:19:in `show'
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:37:33 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:88
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:19
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 187ms (Views: 175.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:38:51 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 57ms (Views: 51.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:38:52 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:88
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:19
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 31ms (Views: 27.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/4/edit" for 127.0.0.1 at 2018-09-18 10:40:14 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:89
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (45.7ms)
+  Rendered articles/edit.html.erb within layouts/application (47.3ms)
+Completed 200 OK in 91ms (Views: 79.8ms | ActiveRecord: 1.9ms)
+
+
+Started PATCH "/articles/4" for 127.0.0.1 at 2018-09-18 10:44:43 +0300
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rLLRIPhL+BbxbHca2PRJTjCK3xSay6YOMa0yBgNFNBCJ6Uncg9nNhRtDNGK4NhmlOof0m9binAjjzWczzIg4/A==", "article"=>{"category"=>"1", "title"=>"W3school", "lien"=>"www.w3school.com", "image_url"=>"w3school.png", "icon_url"=>"w3school_icon.png", "description"=>"reztyuioup", "tuto"=>"dqsfsghjkl"}, "commit"=>"Update Article", "id"=>"4"}
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:90
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:67
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:67
+  [1m[36mArticle Update (0.3ms)[0m  [1m[33mUPDATE "articles" SET "category_id" = ?, "updated_at" = ? WHERE "articles"."id" = ?[0m  [["category_id", 1], ["updated_at", "2018-09-18 07:44:43.083533"], ["id", 4]]
+  ↳ app/controllers/articles_controller.rb:67
+  [1m[35m (101.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:67
+Redirected to http://localhost:3000/articles/4
+Completed 302 Found in 136ms (ActiveRecord: 104.9ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:44:43 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:90
+  [1m[36mCACHE Article Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:20
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 90ms (Views: 80.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:44:46 +0300
+Processing by ArticlesController#index as HTML
+Completed 404 Not Found in 2ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Article without an ID):
+  
+app/controllers/articles_controller.rb:8:in `index'
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:45:35 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:90
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:20
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 74ms (Views: 65.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:45:37 +0300
+Processing by ArticlesController#index as HTML
+Completed 404 Not Found in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Article without an ID):
+  
+app/controllers/articles_controller.rb:8:in `index'
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:45:49 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:90
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:20
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 68ms (Views: 46.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:45:51 +0300
+Processing by ArticlesController#index as HTML
+Completed 404 Not Found in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Article without an ID):
+  
+app/controllers/articles_controller.rb:8:in `index'
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:50:11 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:93
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:23
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 49ms (Views: 32.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:50:14 +0300
+Processing by ArticlesController#index as HTML
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Article without an ID):
+  
+app/controllers/articles_controller.rb:9:in `index'
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:50:48 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:22
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 60ms (Views: 37.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:50:51 +0300
+Processing by ArticlesController#index as HTML
+Completed 404 Not Found in 2ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Article without an ID):
+  
+app/controllers/articles_controller.rb:8:in `index'
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:51:09 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:22
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 57ms (Views: 35.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:51:11 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.8ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (12.0ms)
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (undefined method `title' for nil:NilClass):
+    12:   <tbody>
+    13:     <% @articles.each do |article| %>
+    14:       <tr>
+    15:         <td><%= @article.title %></td>
+    16:         <td><%= link_to 'Show', article %></td>
+    17:         <td><%= link_to 'Edit', edit_article_path(article) %></td>
+    18:         <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  
+app/views/articles/index.html.erb:15:in `block in _app_views_articles_index_html_erb___1796212874503586758_70102591338540'
+app/views/articles/index.html.erb:13:in `_app_views_articles_index_html_erb___1796212874503586758_70102591338540'
+Started GET "/articles/4" for 127.0.0.1 at 2018-09-18 10:54:50 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:93
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:23
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 40ms (Views: 25.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:54:52 +0300
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.7ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 61ms (Views: 53.0ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:56:09 +0300
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 46ms (Views: 33.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/articles/4/edit" for 127.0.0.1 at 2018-09-18 10:56:52 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:93
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (19.3ms)
+  Rendered articles/edit.html.erb within layouts/application (21.7ms)
+Completed 200 OK in 55ms (Views: 40.6ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:56:56 +0300
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 51ms (Views: 48.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:59:07 +0300
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 58ms (Views: 47.4ms | ActiveRecord: 1.0ms)
+
+
+Started DELETE "/articles/4" for 127.0.0.1 at 2018-09-18 10:59:19 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"3LfQXnHX7O1thBYUkeV00FMbstvfYR8we5A/CD4KeJgUAW2/RT1mPHL2AROmCou3gbXU1hQ2QHJayDjEQ3lkBQ==", "id"=>"4"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:93
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:83
+  [1m[36mArticle Destroy (0.9ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 4]]
+  ↳ app/controllers/articles_controller.rb:83
+  [1m[35m (102.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:83
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 118ms (ActiveRecord: 103.4ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 10:59:19 +0300
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (18.3ms)
+Completed 200 OK in 104ms (Views: 93.5ms | ActiveRecord: 1.2ms)
+
+
+Started DELETE "/articles/5" for 127.0.0.1 at 2018-09-18 11:00:27 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"Fj9bWLJeFYoIhIjlU2joGlCmrpDrqhHTK3ExdZIVT2beiea5hrSfWxf2n+Jkhxd9ggjInSD9TpEKKTa572ZT+w==", "id"=>"5"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:93
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:83
+  [1m[36mArticle Destroy (0.3ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 5]]
+  ↳ app/controllers/articles_controller.rb:83
+  [1m[35m (121.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:83
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 146ms (ActiveRecord: 124.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:00:28 +0300
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (10.3ms)
+Completed 200 OK in 56ms (Views: 50.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:05:09 +0300
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (9.0ms)
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 1.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `name' for #<Article:0x00007f8410039fa8>):
+    12:   <tbody>
+    13:     <% @articles.each do |article| %>
+    14:       <tr>
+    15:         <td><%= article.name %></td>
+    16:         <td><%= link_to 'Show', article %></td>
+    17:         <td><%= link_to 'Edit', edit_article_path(article) %></td>
+    18:         <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  
+app/views/articles/index.html.erb:15:in `block in _app_views_articles_index_html_erb___1796212874503586758_70102590667500'
+app/views/articles/index.html.erb:13:in `_app_views_articles_index_html_erb___1796212874503586758_70102590667500'
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:05:26 +0300
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 76ms (Views: 70.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-18 11:06:17 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (9.9ms)
+  Rendered articles/new.html.erb within layouts/application (11.2ms)
+Completed 200 OK in 51ms (Views: 41.4ms | ActiveRecord: 1.8ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 11:06:40 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KxZWq9/lCDsKRPziLSlZIpazjKpkTkYzpgw9vcM7MnkwQ0Qgoh9FPd4X6/6G7R0Xl63jz10dKTWMWNfYxI6GKw==", "article"=>{"category"=>"4", "title"=>"W3school", "lien"=>"www.w3school.com", "image_url"=>"w3school.png", "icon_url"=>"wikibolana_logo.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"creer une compte aponga"}, "commit"=>"Create Article"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:53
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:53
+  [1m[36mArticle Create (0.6ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 4], ["title", "W3school"], ["lien", "www.w3school.com"], ["image_url", "w3school.png"], ["icon_url", "wikibolana_logo.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "creer une compte aponga"], ["created_at", "2018-09-18 08:06:40.753614"], ["updated_at", "2018-09-18 08:06:40.753614"]]
+  ↳ app/controllers/articles_controller.rb:53
+  [1m[35m (185.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:53
+Redirected to http://localhost:3000/articles/15
+Completed 302 Found in 207ms (ActiveRecord: 186.5ms)
+
+
+Started GET "/articles/15" for 127.0.0.1 at 2018-09-18 11:06:40 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"15"}
+  [1m[36mArticle Load (3.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:22
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 84ms (Views: 73.9ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:06:43 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 38ms (Views: 36.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/6" for 127.0.0.1 at 2018-09-18 11:07:41 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[36mCACHE Article Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:22
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 52ms (Views: 45.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:07:44 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.8ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (10.6ms)
+Completed 200 OK in 66ms (Views: 61.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/7" for 127.0.0.1 at 2018-09-18 11:07:46 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:22
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 56ms (Views: 48.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:07:47 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 75ms (Views: 70.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/15" for 127.0.0.1 at 2018-09-18 11:07:51 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"15"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[36mCACHE Article Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:22
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 62ms (Views: 53.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:07:53 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 60ms (Views: 55.3ms | ActiveRecord: 0.7ms)
+
+
+Started DELETE "/articles/6" for 127.0.0.1 at 2018-09-18 11:07:56 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"qy2ikmaqCRzqC6oJyyxRR2iGLTSLHrlgSKGJCaBO+49jmx9zUkCDzfV5vQ78w64guihLOUBJ5iJp+Y7F3T3nEg==", "id"=>"6"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[36mArticle Destroy (0.4ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 6]]
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[35m (107.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 117ms (ActiveRecord: 108.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:07:56 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 84ms (Views: 79.1ms | ActiveRecord: 1.0ms)
+
+
+Started DELETE "/articles/7" for 127.0.0.1 at 2018-09-18 11:08:00 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"OUNvrU+QsgBcemroovdAag5pY4fbdZrB7y1mV+E+BePx9dJMe3o40UMIfe+VGL8N3McFihAixYPOdWGbnE0Zfg==", "id"=>"7"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[36mArticle Destroy (0.3ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 7]]
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[35m (99.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 105ms (ActiveRecord: 99.7ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:08:00 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (12.3ms)
+Completed 200 OK in 75ms (Views: 72.2ms | ActiveRecord: 0.7ms)
+
+
+Started DELETE "/articles/8" for 127.0.0.1 at 2018-09-18 11:08:03 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"pzvxJ7AUOXP4CBw+kqGts6ewkYlxtusI0QUpIzyNoRRvjUzGhP6zoud6CzmlTlLUdR73hLrhtErwXS7vQf69iQ==", "id"=>"8"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[36mArticle Destroy (0.4ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 8]]
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[35m (111.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 119ms (ActiveRecord: 112.4ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:08:03 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 86ms (Views: 79.1ms | ActiveRecord: 0.7ms)
+
+
+Started DELETE "/articles/9" for 127.0.0.1 at 2018-09-18 11:08:06 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"9WXEaO1sLxAkY6cEA9Bx/kwFca0UYOUZeRh8fua0CyM903mJ2YalwTsRsAM0P46ZnqsXoN83ultYQHuym8cXvg==", "id"=>"9"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[36mArticle Destroy (0.3ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 9]]
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[35m (99.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 104ms (ActiveRecord: 99.6ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:08:07 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 42ms (Views: 38.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/10/edit" for 127.0.0.1 at 2018-09-18 11:08:08 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (17.5ms)
+  Rendered articles/edit.html.erb within layouts/application (20.4ms)
+Completed 200 OK in 64ms (Views: 59.2ms | ActiveRecord: 1.1ms)
+
+
+Started PATCH "/articles/10" for 127.0.0.1 at 2018-09-18 11:08:40 +0300
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"CfC9lcPyWX8rY4Buxm8o4JJbZ4e8o6b7l9jeHgmefOsDbY2Dzl4CH8YlQhie1x0zElimxCWbS07MTLlm8GIBVw==", "article"=>{"category"=>"1", "title"=>"aponga", "lien"=>"www.aponga.com", "image_url"=>"aponga.png", "icon_url"=>"aponga-Convertimage.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Update Article", "id"=>"10"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[36mArticle Update (0.5ms)[0m  [1m[33mUPDATE "articles" SET "category_id" = ?, "title" = ?, "lien" = ?, "image_url" = ?, "icon_url" = ?, "updated_at" = ? WHERE "articles"."id" = ?[0m  [["category_id", 1], ["title", "aponga"], ["lien", "www.aponga.com"], ["image_url", "aponga.png"], ["icon_url", "aponga-Convertimage.png"], ["updated_at", "2018-09-18 08:08:40.103904"], ["id", 10]]
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[35m (192.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:69
+Redirected to http://localhost:3000/articles/10
+Completed 302 Found in 210ms (ActiveRecord: 193.9ms)
+
+
+Started GET "/articles/10" for 127.0.0.1 at 2018-09-18 11:08:40 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:22
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 87ms (Views: 82.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:08:43 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 53ms (Views: 49.2ms | ActiveRecord: 0.5ms)
+
+
+Started DELETE "/articles/11" for 127.0.0.1 at 2018-09-18 11:08:49 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"5on7ergIxa8teXfXTcaojJeK3kTV+TgzixLoW7lR+8IuP0abjOJPfjILYNB6KVfrRSS4SR6uZ3GqSu+XxCLnXw==", "id"=>"11"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[36mArticle Destroy (0.6ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 11]]
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[35m (77.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 86ms (ActiveRecord: 78.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:08:49 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 91ms (Views: 86.9ms | ActiveRecord: 0.5ms)
+
+
+Started DELETE "/articles/12" for 127.0.0.1 at 2018-09-18 11:08:55 +0300
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"rGqknZ9Bm6NoOOOiJuXmpskvqFba0r5Kv3G7bynczDtk3Bl8q6sRcndK9KURChnBG4HOWxGF4QieKbyjVK/Qpg==", "id"=>"12"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[35m (0.7ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[36mArticle Destroy (0.3ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 12]]
+  ↳ app/controllers/articles_controller.rb:82
+  [1m[35m (108.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:82
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 118ms (ActiveRecord: 109.9ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:08:56 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 45ms (Views: 40.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/13/edit" for 127.0.0.1 at 2018-09-18 11:09:25 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"13"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (10.4ms)
+  Rendered articles/edit.html.erb within layouts/application (15.1ms)
+Completed 200 OK in 55ms (Views: 50.1ms | ActiveRecord: 0.8ms)
+
+
+Started PATCH "/articles/13" for 127.0.0.1 at 2018-09-18 11:10:06 +0300
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"cyu0fLZ3PqvhkSNU0aAk89jbGqhQ7i9J6oN6Oov57MHnMWsHgsX5/g28QjNSBmElz+ElKUum2XOt975fQODH+A==", "article"=>{"category"=>"1", "title"=>"Wikibolana", "lien"=>"www.sobikamada.com", "image_url"=>"wikibolana.png", "icon_url"=>"wikibolana_logo.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Update Article", "id"=>"13"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[36mArticle Update (0.9ms)[0m  [1m[33mUPDATE "articles" SET "category_id" = ?, "title" = ?, "lien" = ?, "image_url" = ?, "icon_url" = ?, "updated_at" = ? WHERE "articles"."id" = ?[0m  [["category_id", 1], ["title", "Wikibolana"], ["lien", "www.sobikamada.com"], ["image_url", "wikibolana.png"], ["icon_url", "wikibolana_logo.png"], ["updated_at", "2018-09-18 08:10:06.935953"], ["id", 13]]
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[35m (199.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:69
+Redirected to http://localhost:3000/articles/13
+Completed 302 Found in 221ms (ActiveRecord: 201.5ms)
+
+
+Started GET "/articles/13" for 127.0.0.1 at 2018-09-18 11:10:07 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"13"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:22
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 64ms (Views: 55.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:10:09 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 56ms (Views: 52.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:11:05 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.9ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 61ms (Views: 55.9ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/articles/13/edit" for 127.0.0.1 at 2018-09-18 11:11:21 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"13"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (12.4ms)
+  Rendered articles/edit.html.erb within layouts/application (16.1ms)
+Completed 200 OK in 67ms (Views: 60.1ms | ActiveRecord: 1.1ms)
+
+
+Started PATCH "/articles/13" for 127.0.0.1 at 2018-09-18 11:11:43 +0300
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"q6SZNP73EO6gyDoX1f0zlFf83BSrslsJzzkcTBxiWhU/vkZPykXXu0zlW3BWW3ZCQMbjlbD6rTOITdgp13txLA==", "article"=>{"category"=>"1", "title"=>"Wikibolana", "lien"=>"www.wiki.com", "image_url"=>"wikibolana.png", "icon_url"=>"wikibolana_logo.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"dqsfsghjkl"}, "commit"=>"Update Article", "id"=>"13"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[36mArticle Update (0.5ms)[0m  [1m[33mUPDATE "articles" SET "lien" = ?, "updated_at" = ? WHERE "articles"."id" = ?[0m  [["lien", "www.wiki.com"], ["updated_at", "2018-09-18 08:11:43.333586"], ["id", 13]]
+  ↳ app/controllers/articles_controller.rb:69
+  [1m[35m (214.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:69
+Redirected to http://localhost:3000/articles/13
+Completed 302 Found in 235ms (ActiveRecord: 215.7ms)
+
+
+Started GET "/articles/13" for 127.0.0.1 at 2018-09-18 11:11:43 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"13"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:22
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 82ms (Views: 72.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 11:11:46 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.8ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 57ms (Views: 52.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 12:39:53 +0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 174ms (Views: 153.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 12:41:32 +0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 44ms (Views: 42.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-09-18 12:41:35 +0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (75.1ms)
+Completed 200 OK in 152ms (Views: 135.8ms | ActiveRecord: 2.3ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-09-18 12:42:04 +0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5ppPlpEy3/+RfVmLs6j1hqDmceUe69xdkobK0hFQzuPj38QA+9OLfuQp0+VReXgLwyO90om3fnmfTYNvwNQWzw==", "user"=>{"email"=>"mimi@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mimi@gmail.com"], ["LIMIT", 1]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "mimi@gmail.com"], ["encrypted_password", "$2a$11$xpajT4JUYc1jMK2.XJrDYeQCnnHq8yTSKEjGJOjF8c.NiAqlP5K2."], ["created_at", "2018-09-18 09:42:04.960459"], ["updated_at", "2018-09-18 09:42:04.960459"]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[35m (113.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 489ms (ActiveRecord: 113.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 12:42:05 +0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:4
+  Rendered home/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 50ms (Views: 48.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 12:43:13 +0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:4
+  Rendered home/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 85ms (Views: 80.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 12:43:16 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 74ms (Views: 65.6ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-18 12:44:10 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (26.0ms)
+  Rendered articles/new.html.erb within layouts/application (27.5ms)
+Completed 200 OK in 87ms (Views: 50.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 12:44:15 +0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:4
+  Rendered home/index.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 79ms (Views: 75.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 12:44:18 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 44ms (Views: 41.0ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2018-09-18 12:44:41 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"4du4KVg2cyAa7O+RUfKVhwWkAdH4bevAAJnhbtcEGFgpbQXIbNz58QWe+JZmHWrg1wpn3DM6tIIhweaiqncExQ=="}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 25ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 12:44:41 +0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 34ms (Views: 32.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-09-18 12:44:44 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (20.6ms)
+Completed 200 OK in 110ms (Views: 105.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-09-18 12:45:07 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZYHRitdmW8Zu52DMThcHgsvFcFjucYj81PqE3XHvqYajzkcxbco6NFGfJwlnjRxfh9KEP8/VnnRy5xbSP+D+Yg==", "user"=>{"email"=>"mimi@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "mimi@gmail.com"], ["LIMIT", 1]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 199ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 12:45:07 +0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:4
+  Rendered home/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 36ms (Views: 34.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 12:45:10 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 63ms (Views: 58.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 13:00:36 +0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:4
+  Rendered home/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 43ms (Views: 41.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 13:00:40 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 54ms (Views: 50.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 13:00:48 +0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:4
+  Rendered home/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 44ms (Views: 40.4ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2018-09-18 13:00:51 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"hjzfLIlJsARtzNp8W7vI58R8EqGOQ9UHSfoNo+kWy13VAJ0AWYY2GXsg5JYXHIm2XDu9XRa2IiIBT+Yo5p8zBA=="}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 12ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 13:00:51 +0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 31ms (Views: 29.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-09-18 13:01:03 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 50ms (Views: 46.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-09-18 13:01:17 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QaCvTp6lwhiO5iHuMGv7WYbG8FCMO3a58KVE7gh4RouFFBjeOiQ4FVZcWvDEYWIrq0QdzkDIi5zltQpb1yQl4A==", "user"=>{"email"=>"mimi@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "mimi@gmail.com"], ["LIMIT", 1]]
+  ↳ /home/mirantsoa/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/
+Completed 302 Found in 153ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-18 13:01:17 +0300
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:4
+  Rendered home/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 22ms (Views: 21.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-09-18 13:01:21 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.8ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:13
+  Rendered articles/index.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 55ms (Views: 50.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-09-18 13:01:38 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  Rendered articles/_form.html.erb (10.3ms)
+  Rendered articles/new.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 33ms (Views: 32.0ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-09-18 13:02:19 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Tc0U5xY5Ekg/AuwY6RQbDgv00rkVuFACa8MkwGdTHFYdSAcLf3o32N/m+O2JclaB8Jgqg+5E1h2Yxr/crZvbuQ==", "article"=>{"category"=>"3", "title"=>"Wikibolana", "lien"=>"zearztyuez", "image_url"=>"Github.png", "icon_url"=>"wikibolana_logo.png", "description"=>"Reseaux sociaux vita gasy", "tuto"=>"creer une compte aponga"}, "commit"=>"Create Article"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:53
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:53
+  [1m[36mArticle Create (1.3ms)[0m  [1m[32mINSERT INTO "articles" ("category_id", "title", "lien", "image_url", "icon_url", "description", "tuto", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["category_id", 3], ["title", "Wikibolana"], ["lien", "zearztyuez"], ["image_url", "Github.png"], ["icon_url", "wikibolana_logo.png"], ["description", "Reseaux sociaux vita gasy"], ["tuto", "creer une compte aponga"], ["created_at", "2018-09-18 10:02:19.204554"], ["updated_at", "2018-09-18 10:02:19.204554"]]
+  ↳ app/controllers/articles_controller.rb:53
+  [1m[35m (192.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:53
+Redirected to http://localhost:3000/articles/16
+Completed 302 Found in 227ms (ActiveRecord: 193.9ms)
+
+
+Started GET "/articles/16" for 127.0.0.1 at 2018-09-18 13:02:19 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 16], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  [1m[36mCACHE Article Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 16], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:22
+  Rendering articles/show.html.erb within layouts/application
+  Rendered articles/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 42ms (Views: 33.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/16/edit" for 127.0.0.1 at 2018-09-18 13:29:36 +0300
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 16], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:92
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/articles/_form.html.erb:16
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/articles/_form.html.erb:17
+  Rendered articles/_form.html.erb (5.8ms)
+  Rendered articles/edit.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 48ms (Views: 45.6ms | ActiveRecord: 0.7ms)
+
+
