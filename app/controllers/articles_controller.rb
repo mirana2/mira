@@ -47,18 +47,26 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     parama = params[:article]
-    @article = Article.new(category_id: parama[:category], title: parama[:title], lien: parama[:lien], image_url: parama[:image_url],icon_url: parama[:icon_url],description: parama[:description], tuto:parama[:tuto])
-
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
+    record  = Article.new(category_id: parama[:category], title: parama[:title], lien: parama[:lien], image_url: parama[:image_url],icon_url: parama[:icon_url],description: parama[:description], tuto:parama[:tuto])
+    request = current_user.request_for_create(record, reason: "something")
+    request.save # Created Approval::Request record
+    # parama = params[:article]
+    # if current_user.reputation>=25
+    #   @article = Article.new(category_id: parama[:category], title: parama[:title], lien: parama[:lien], image_url: parama[:image_url],icon_url: parama[:icon_url],description: parama[:description], tuto:parama[:tuto])
+    # else 
+    #   @article = PendingArticle.new(user_id:current_user.id, category_id: parama[:category], title: parama[:title], lien: parama[:lien], image_url: parama[:image_url],icon_url: parama[:icon_url],description: parama[:description], tuto:parama[:tuto])
+    # end
+    
+    # respond_to do |format|
+    #   if @article.save
+    #     format.html { redirect_to @article, notice: 'Article was successfully created.' }
+    #     format.json { render :show, status: :created, location: @article }
         
-      else
-        format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
-    end
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @article.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /articles/1

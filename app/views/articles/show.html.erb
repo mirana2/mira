@@ -1,4 +1,20 @@
 <p id="notice"><%= notice %></p>
-<%= @article.title%>
-<%= link_to 'Edit', edit_article_path(@article) %> 
-<%= link_to 'Back', articles_path %>
+
+<% if user_signed_in?  %>
+        <%= @article.title%>
+        <%= link_to 'Edit', edit_article_path(@article) %>
+        <li>
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+        </li>
+       
+    <% else %>
+        <li>
+            <%= link_to "Sign in", new_user_session_path %>
+        </li>
+        <li>
+            <%= link_to "Sign up", new_user_registration_path %>
+        </li>
+        <%= @article.title%>
+        <%= link_to 'Back', articles_path %>
+
+    <% end %>

@@ -1,0 +1,17 @@
+<%= form_with(model: pending_article, local: true) do |form| %>
+  <% if pending_article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pending_article.errors.count, "error") %> prohibited this pending_article from being saved:</h2>
+
+      <ul>
+      <% pending_article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
